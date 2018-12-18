@@ -38,7 +38,7 @@ class Login extends React.Component {
           <div>
             <button type="button" onClick={this.handleSubmit} className='btn btn-success'>Login</button>
           </div>
-          Don't have an account? <Link to={'/'}>Signup</Link>
+          Don't have an account? <Link to={'/signup'}>Signup</Link>
         </form>
       </div>
     );

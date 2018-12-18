@@ -16,6 +16,7 @@ class Chat extends Component {
       username: window.localStorage.getItem('username'),
       online: [],
     }
+    this.chatScreen = '';
   }
 
   componentWillMount() {

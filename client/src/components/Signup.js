@@ -15,9 +15,11 @@ class Signup extends React.Component {
     const { username, email, password } = this.state;
 
     const { data } = await axios.post(`${baseURL}/signup`, { username, email, password });
+    
+    window.localStorage.setItem('isLoggedIn', data.success);
+
     if (data.username && data.success) {
       window.localStorage.setItem('username', data.username);
-      window.localStorage.setItem('isLoggedIn', data.success);
       this.props.history.push('/');
     }
   }
