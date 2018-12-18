@@ -15,15 +15,23 @@ class Bot extends Component {
     }
   }
 
+  scrollChat = () => {
+    this.chatScreen && this.chatScreen.scrollIntoView({block: 'end', behavior: 'smooth'});
+  }
+
+  componentDidUpdate = () => {
+    this.scrollChat();
+  }
+
   componentWillMount() {
     const this2 = this;
     let temp = [];
 
     bot.on('bot_message', function(msg) {
       if (msg.username.toString() === 'Bot') {
-        msg.align = 'right';
-      } else {
         msg.align = 'left';
+      } else {
+        msg.align = 'right';
       }
       temp = [...this2.state.message, msg];
       this2.setState({
@@ -52,7 +60,8 @@ class Bot extends Component {
 
     const msg = {
       text,
-      username
+      username,
+      align: 'right',
     }
     let temp = [...message];
 
@@ -74,6 +83,7 @@ class Bot extends Component {
       <Fragment>
         <Navbar logout={this.handleLogout} />
         <ChatWindow 
+          refs={elem => { this.chatScreen = elem }}
           message={message}
           text={text} 
           handleSubmit={this.handleSubmit} 

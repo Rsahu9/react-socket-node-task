@@ -41,7 +41,7 @@ class Chat extends Component {
   }
 
   scrollChat = () => {
-    this.chatScreen.scrollIntoView({block: 'end', behavior: 'smooth'});
+    this.chatScreen && this.chatScreen.scrollIntoView({block: 'end', behavior: 'smooth'});
   }
 
   componentDidUpdate = () => {
