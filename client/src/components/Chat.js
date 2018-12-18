@@ -31,7 +31,15 @@ class Chat extends Component {
     });
   }
 
-  async componentDidMount() {
+  scrollChat = () => {
+    this.chatScreen.scrollIntoView({block: 'end', behavior: 'smooth'});
+  }
+
+  componentDidUpdate = () => {
+    this.scrollChat();
+  }
+
+  componentDidMount= async () => {
     const { data } = await axios.get(`${baseURL}/chats`);
     const name = window.localStorage.getItem('username');
     data.forEach((text) => this.alignText(text));
@@ -39,8 +47,7 @@ class Chat extends Component {
       username: name,
       message: data,
     });
-    window.scrollTo(0, this.chatScreen.clientHeight);
-    this.chatScreen.scrollIntoView({block: 'end', behavior: 'smooth'});
+    this.scrollChat();
   }
 
   alignText = (text) => {

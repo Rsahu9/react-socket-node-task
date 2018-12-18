@@ -5,17 +5,19 @@ import Signup from './components/Signup';
 import News from './components/News';
 import Chat from './components/Chat';
 import Bot from './components/Bot';
+import { PrivateRoute } from './PrivateRoutes';
 
 class Routes extends Component {  
   render() {
+    const auth = !!window.localStorage.getItem('isLoggedIn');
     return(
       <Router>
         <Switch>
-          <Route path='/chat' component={Chat} />
-          <Route path='/bot' component={Bot} />
+          <PrivateRoute path='/chat' auth={auth} component={Chat} />
+          <PrivateRoute path='/bot' auth={auth} component={Bot} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/' component={News} />
+          <PrivateRoute path='/' auth={auth} component={News} />
         </Switch>
       </Router>
     );

@@ -10,11 +10,11 @@ const ChatWindow = (props) => (
       </div>
       <div className="title">{props.username || 'Bot'}</div>
     </div>
-    <ul className="messages" ref={props.refs}>
-      { props.message.map(({ text, align = 'left' }, index) => (
-        <div className="message_template" key={index}>
+    <ul className="messages" >
+      { props.message.map(({ text, username, align = 'left' }, index) => (
+        <div className="message_template" key={index} ref={props.refs}>
           <li className={`message ${align}`}>
-            <div className="avatar"></div>
+            <div className="avatar"><span className='message-username'>{username}</span></div>
             <div className="text_wrapper">
               <div className="text">{text}</div>
             </div>

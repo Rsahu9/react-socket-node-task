@@ -17,6 +17,7 @@ class Login extends React.Component {
     
     if (data.success && data.username) {
       window.localStorage.setItem('username', data.username);
+      window.localStorage.setItem('isLoggedIn', data.success);
       this.props.history.push('/');
     }
   }
