@@ -9,13 +9,19 @@ const Navbar = (props) => (
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link" href="/chat">Chat with friends<span className="sr-only">(current)</span></a>
+          <a className="nav-link" href="/chat">Chat with friends</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/bot">Chat with a bot</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="/">News Portal</a>
+        </li>
+        <li className="nav-item dropdown">
+          <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Online Users</a>
+          <div className="dropdown-menu">
+            { props.online && props.online.map((value, index) => <span className="dropdown-item">{value}</span> )}
+          </div>
         </li>
       </ul>
       <form className='form-inline my-2 my-lg-0'>

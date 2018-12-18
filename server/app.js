@@ -14,8 +14,17 @@ const getNewsFromApi = require('./newsApi');
 app.use(cors("*"));
 app.use(routes);
 
+let users = [];
+
 const chats = io.of('/chat')
   .on("connection", socket => {
+
+  socket.on('online', async (data) => {
+    if(!users.includes(data.username)) {
+      users.push(data.username);
+    }
+    chats.emit('online', users);
+  })
 
   socket.on('message', async (data) => {
     const chat = new Chat({
@@ -26,7 +35,9 @@ const chats = io.of('/chat')
     chats.emit('message', data)
   })
 
-  socket.on("disconnect", () => console.log("Client disconnected"));
+  socket.on("disconnect", () => {
+    console.log("Client disconnected")
+  });
 });
  
 const bot = io.of('/bot')

@@ -13,13 +13,21 @@ class Chat extends Component {
     this.state = {
       message: [],
       text: '',
-      username: '',
+      username: window.localStorage.getItem('username'),
+      online: [],
     }
   }
 
   componentWillMount() {
     const this2 = this;
     let temp = [];
+
+    socket.on('online', function(users) {
+      temp = [...this2.state.online, ...users];
+      this2.setState({
+        online: temp
+      });
+    })
 
     socket.on('message', function(msg) {
       const text = this2.alignText(msg);    
@@ -41,19 +49,19 @@ class Chat extends Component {
 
   componentDidMount= async () => {
     const { data } = await axios.get(`${baseURL}/chats`);
-    const name = window.localStorage.getItem('username');
     data.forEach((text) => this.alignText(text));
+    
+    socket.emit('online',{ username: this.state.username });
+    
     this.setState({
-      username: name,
       message: data,
     });
     this.scrollChat();
   }
 
   alignText = (text) => {
-    const username = window.localStorage.getItem('username');
-    
-    if (text.username.toString() === username.toString()) {
+   
+    if (text.username.toString() === this.state.username.toString()) {
       text.align = 'right';
     } else {
       text.align = 'left';
@@ -76,10 +84,10 @@ class Chat extends Component {
   }
 
   render() {
-    const { message, username, text } = this.state;
+    const { message, username, text, online } = this.state;
     return (
       <Fragment>
-        <Navbar logout={this.handleLogout} />
+        <Navbar logout={this.handleLogout} online={online}/>
         <ChatWindow 
           message={message} 
           text={text}
@@ -88,6 +96,7 @@ class Chat extends Component {
           username={username} 
           handleSubmit={this.handleSubmit} 
         />
+        
       </Fragment>
     );
   }
