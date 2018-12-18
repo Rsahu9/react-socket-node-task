@@ -18,6 +18,11 @@ class News extends Component{
     });
   }
 
+  handleLogout = () => {
+    window.localStorage.clear();
+    this.props.history.push('/login');
+  }
+
   componentDidMount() {
     news.emit('news_headlines');
   }
@@ -25,7 +30,7 @@ class News extends Component{
   render(){
     return(
       <Fragment>
-        <Navbar />
+        <Navbar logout={this.handleLogout} />
         <div className='container'>
           { !this.state.loading 
             ? this.state.headlines.map(({ description, content, title, url, urlToImage }, index) => (

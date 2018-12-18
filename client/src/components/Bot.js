@@ -40,6 +40,11 @@ class Bot extends Component {
     });
   }
 
+  handleLogout = () => {
+    window.localStorage.clear();
+    this.props.history.push('/login');
+  }
+
   handleSubmit = (e) => {
     const { text, username, message } = this.state;
 
@@ -67,7 +72,7 @@ class Bot extends Component {
     const { message, text } = this.state;
     return (
       <Fragment>
-        <Navbar />
+        <Navbar logout={this.handleLogout} />
         <ChatWindow 
           message={message}
           text={text} 

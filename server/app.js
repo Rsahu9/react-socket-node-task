@@ -16,7 +16,7 @@ app.use(routes);
 
 const chats = io.of('/chat')
   .on("connection", socket => {
-  console.log(socket);
+
   socket.on('message', async (data) => {
     const chat = new Chat({
       username: data.username,
