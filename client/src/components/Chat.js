@@ -97,7 +97,6 @@ class Chat extends Component {
           username={username} 
           handleSubmit={this.handleSubmit} 
         />
-        
       </Fragment>
     );
   }

@@ -10,6 +10,7 @@ const routes = require('./routes');
 const server = http.createServer(app);
 const io = socketIo(server);
 const getNewsFromApi = require('./newsApi');
+const getMessageFromBotApi = require('./botApi');
 
 app.use(cors("*"));
 app.use(routes);
@@ -43,14 +44,7 @@ const chats = io.of('/chat')
 const bot = io.of('/bot')
   .on('connection', socket => {
     socket.on('bot_message', async (data) => {
-      switch(data.text.toUpperCase()){
-        case 'HI':
-          bot.emit('bot_message', { text: `Hello ${data.username}`, username: 'Bot' });
-          break;
-        
-        default:
-          bot.emit('bot_message', { text: `${data.username}, I don't understand what you say.`, username: 'Bot' });
-      }
+      getMessageFromBotApi(bot,data.text);
     });
     socket.on("disconnect", () => console.log("Client disconnected"));
   })

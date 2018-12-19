@@ -18,9 +18,9 @@ const Navbar = (props) => (
           <a className="nav-link" href="/">News Portal</a>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Online Users</a>
+          <span className="nav-link dropdown-toggle" data-toggle="dropdown">Online Users</span>
           <div className="dropdown-menu">
-            { props.online && props.online.map((value, index) => <span className="dropdown-item">{value}</span> )}
+            { props.online && props.online.map((value, index) => <span className="dropdown-item" key={index}>{value}</span> )}
           </div>
         </li>
       </ul>
