@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const getMessageFromBotApi = async (bot,text) => {
-  const accessToken = 'c394674efc18424b8ae7fe711c66e9f1';
+  const accessToken = 'YOUR_API.AI_CLIENT_ACCESS_TOKEN';
   const baseUrl = "https://api.api.ai/v1/";
   
   const { data: { result } } = await axios({
