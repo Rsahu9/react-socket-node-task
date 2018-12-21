@@ -75,6 +75,32 @@ class Chat extends Component {
     this.props.history.push('/login');
   }
 
+  handleSubmitFile = async (event) => {
+    let file = new FormData();
+    file.append('attachment', event.target.files[0]);
+    file.append('name', 'attachment');
+    
+    const uploads = await axios({
+      method: "post",
+      url: baseURL + "/item/upload",
+      encType:"multipart/form-data",
+      data: file,
+    });
+    const msg = {
+      username: this.state.username,
+      file: uploads.data,
+      align: 'right'
+    }
+    const temp = [...this.state.message, msg];
+    this.setState({
+      message: temp,
+    });
+  }
+
+  handleOpenFile = (e) => {
+    window.open(e.target.innerText, '_blank');
+  }
+
   handleSubmit = (e) => {
     const { text, username } = this.state;
     if(e.type === 'keyup' && (e.which || e.keyCode) === 13 ) {
@@ -95,7 +121,9 @@ class Chat extends Component {
           onChange={(data) => this.setState({text: data})} 
           refs={elem => { this.chatScreen = elem }}
           username={username} 
-          handleSubmit={this.handleSubmit} 
+          handleSubmit={this.handleSubmit}
+          handleSubmitFile={this.handleSubmitFile}
+          openFile={this.handleOpenFile} 
         />
       </Fragment>
     );

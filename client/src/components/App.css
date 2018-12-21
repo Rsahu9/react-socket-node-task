@@ -152,7 +152,7 @@ body {
   height: 50px;
   border-radius: 25px;
   border: 1px solid #bcbdc0;
-  width: calc(100% - 160px);
+  width: calc(100% - 200px);
   position: relative;
   padding: 0 20px;
 }
@@ -177,6 +177,28 @@ body {
   transition: all 0.2s linear;
   text-align: center;
   float: right;
+}
+.send_files {
+  width: 50px;
+  position: absolute;
+  margin-left: 5px;
+  height: 50px;
+  display: inline-block;
+  border-radius: 50px;
+  background-color: #a3d063;
+  border: 2px solid #a3d063;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.file-input {
+  width: 45px;
+  border-radius: 20px;
+  border-style: none;
+  height: 45px;
+  background: transparent;
+  opacity: 0;
 }
 .bottom_wrapper .send_message:hover {
   color: #a3d063;
@@ -203,6 +225,7 @@ body {
   margin-left: 8px;
 }
 
-.loader {
-
+.shared-image {
+  height: 320px;
+  width: 240px;
 }

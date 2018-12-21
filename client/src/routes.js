@@ -16,7 +16,7 @@ class Routes extends Component {
           <PrivateRoute path='/bot' component={Bot} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <PrivateRoute path='/' component={News} />
+          <PrivateRoute exact path='/' component={News} />
         </Switch>
       </Router>
     );

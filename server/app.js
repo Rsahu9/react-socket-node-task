@@ -1,19 +1,20 @@
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const port = process.env.PORT || 8000;
-const db = require('./db');
-const cors = require('cors');
-const app = express();
-const Chat = require('./model/chat');
-const routes = require('./routes');
-const server = http.createServer(app);
-const io = socketIo(server);
-const getNewsFromApi = require('./newsApi');
-const getMessageFromBotApi = require('./botApi');
+const express = require("express"),
+      http = require("http"),
+      socketIo = require("socket.io"),
+      port = process.env.PORT || 8000,
+      db = require('./db'),
+      cors = require('cors'),
+      app = express(),
+      Chat = require('./model/chat'),
+      routes = require('./routes'),
+      server = http.createServer(app),
+      io = socketIo(server),
+      getNewsFromApi = require('./newsApi'),
+      getMessageFromBotApi = require('./botApi');
 
 app.use(cors("*"));
 app.use(routes);
+app.use(express.static(__dirname));
 
 let users = [];
 

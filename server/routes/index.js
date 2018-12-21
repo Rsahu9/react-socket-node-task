@@ -1,8 +1,10 @@
-const express = require("express");
-const bodyParser = require('body-parser');
-const Chat = require('../model/chat');
-const User = require('../model/user');
-const router = express.Router();
+const express = require("express"),
+      bodyParser = require('body-parser'),
+      Chat = require('../model/chat'),
+      User = require('../model/user'),
+      router = express.Router(),
+      Attachment = require('../model/attachment'),
+      upload = require('../multer');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -39,6 +41,18 @@ router.post("/login", async (req, res) => {
     res.send({ success: false, error: 'Something went wrong' });
   }
 });
+
+router.post('/item/upload', upload.single('attachment'), (req, res, next) => {
+  const file = req.file;
+  if (!file) {
+    const error = new Error('Please choose files')
+    error.httpStatusCode = 400
+    return next(error)
+  }
+  const attachment = new Attachment(file);
+  attachment.save();
+  res.send(file)  
+})
 
 router.get("/chats", async (req, res) => {
   const chats = await Chat.find();
