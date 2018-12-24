@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import { Emoji } from 'emoji-mart';
 
 const ChatWindow = (props) => (
   <div className="chat_window">
@@ -25,7 +26,7 @@ const ChatWindow = (props) => (
                    </div>
                   : <div>
                       <i className="fa fa-file fa-lg" aria-hidden="true"></i><br/>
-                      <a href={`http://localhost:8000/${attachment}`} target='_blank' rel='noopener noreferrer'>{attachment}</a>
+                      <a href={`http://localhost:8000/${attachment}`} target='_blank' rel='noopener noreferrer'>{attachment.split('/')[1]}</a>
                     </div> }
               <small className='text-muted'>Date: {moment(created_At).format('LLLL')}</small>
             </div>
@@ -35,6 +36,7 @@ const ChatWindow = (props) => (
       }
     </ul>
     <div className="bottom_wrapper clearfix">
+      <span className='emoji-button'><Emoji emoji={{ id: 'smiley', skin: 3 }} size={30} ></Emoji></span>
       <div className="message_input_wrapper">
         <input 
           className="message_input" 
