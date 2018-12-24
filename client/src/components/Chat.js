@@ -79,7 +79,7 @@ class Chat extends Component {
     let file = new FormData();
     file.append('attachment', event.target.files[0]);
     file.append('name', 'attachment');
-    
+
     const uploads = await axios({
       method: "post",
       url: baseURL + "/item/upload",
@@ -95,10 +95,6 @@ class Chat extends Component {
     this.setState({
       message: temp,
     });
-  }
-
-  handleOpenFile = (e) => {
-    window.open(e.target.innerText, '_blank');
   }
 
   handleSubmit = (e) => {
@@ -122,8 +118,7 @@ class Chat extends Component {
           refs={elem => { this.chatScreen = elem }}
           username={username} 
           handleSubmit={this.handleSubmit}
-          handleSubmitFile={this.handleSubmitFile}
-          openFile={this.handleOpenFile} 
+          handleSubmitFile={this.handleSubmitFile} 
         />
       </Fragment>
     );
