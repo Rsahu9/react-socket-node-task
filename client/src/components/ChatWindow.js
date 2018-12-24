@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const ChatWindow = (props) => (
   <div className="chat_window">
@@ -11,15 +12,17 @@ const ChatWindow = (props) => (
       <div className="title">{props.username || 'Bot'}</div>
     </div>
     <ul className="messages" >
-      { props.message.map(({ text, file, username, align = 'left' }, index) => (
+      { props.message.map(({ text, attachment, username, align = 'left', created_At }, index) => (
         <div className="message_template" key={index} ref={props.refs}>
           <li className={`message ${align}`}>
             <div className="avatar"><span className='message-username'>{username}</span></div>
             <div className="text_wrapper">
               { text 
                 ? <div className="text">{text}</div> 
-                : <img src={`http://localhost:8000/${file.path}`} alt='shared_image' className='shared-image'/> }
-
+                : <div className='shared-image'>
+                    <img src={`http://localhost:8000/${attachment}`} alt='shared_image' className='shared-image'/>
+                  </div> }
+              <small className='text-muted'>Date: {moment(created_At).format('LLLL')}</small>
             </div>
           </li>
         </div>
@@ -36,9 +39,10 @@ const ChatWindow = (props) => (
           onKeyUp={props.handleSubmit}
         />
       </div>
-      <div className="send_files">
-        <input type='file' onChange={props.handleSubmitFile} className='file-input' name='attachments' />
-      </div>
+      <div className="file btn btn-lg btn-primary send_files">
+				Upload
+				<input type="file" className='file-input' onChange={props.handleSubmitFile} name='attachments'/>
+			</div>
       <div className="send_message" onClick={props.handleSubmit} >
         <div className="icon"></div>
         <div className="text">Send</div>

@@ -11,7 +11,7 @@ body {
   position: absolute;
   width: calc(100% - 20px);
   max-width: 800px;
-  height: 500px;
+  height: 530px;
   border-radius: 10px;
   background-color: #fff;
   left: 50%;
@@ -28,10 +28,12 @@ body {
   padding: 20px 0 15px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
 }
+
 .top_menu .buttons {
   margin: 3px 0 0 20px;
   position: absolute;
 }
+
 .top_menu .buttons .button {
   width: 16px;
   height: 16px;
@@ -40,15 +42,19 @@ body {
   margin-right: 10px;
   position: relative;
 }
+
 .top_menu .buttons .button.close {
   background-color: #f5886e;
 }
+
 .top_menu .buttons .button.minimize {
   background-color: #fdbf68;
 }
+
 .top_menu .buttons .button.maximize {
   background-color: #a3d063;
 }
+
 .top_menu .title {
   text-align: center;
   color: #bcbdc0;
@@ -60,55 +66,67 @@ body {
   list-style: none;
   padding: 20px 10px 0 10px;
   margin: 0;
-  height: 347px;
+  height: 370px;
   overflow: scroll;
 }
+
 .messages .message {
   clear: both;
   overflow: hidden;
   margin-bottom: 20px;
   transition: all 0.5s linear;
 }
+
 .messages .message.left .avatar {
   background-color: #f5886e;
   float: left;
 }
+
 .messages .message.left .text_wrapper {
   background-color: #ffe6cb;
   margin-left: 20px;
 }
+
 .messages .message.left .text_wrapper::after, .messages .message.left .text_wrapper::before {
   right: 100%;
   border-right-color: #ffe6cb;
 }
+
 .messages .message.left .text {
   color: #c48843;
 }
+
 .messages .message.right .avatar {
   background-color: #fdbf68;
   float: right;
 }
+
 .messages .message.right .text_wrapper {
   background-color: #c7eafc;
   margin-right: 20px;
   float: right;
 }
+
 .messages .message.right .text_wrapper::after, .messages .message.right .text_wrapper::before {
   left: 100%;
   border-left-color: #c7eafc;
 }
+
 .messages .message.right .text {
   color: #45829b;
 }
+
 .messages .message.appeared {
   opacity: 1;
 }
+
 .messages .message .avatar {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   display: inline-block;
 }
+
 .messages .message .text_wrapper {
   display: inline-block;
   padding: 20px;
@@ -117,6 +135,7 @@ body {
   min-width: 100px;
   position: relative;
 }
+
 .messages .message .text_wrapper::after, .messages .message .text_wrapper:before {
   top: 18px;
   border: solid transparent;
@@ -126,14 +145,17 @@ body {
   position: absolute;
   pointer-events: none;
 }
+
 .messages .message .text_wrapper::after {
   border-width: 13px;
   margin-top: 0px;
 }
+
 .messages .message .text_wrapper::before {
   border-width: 15px;
   margin-top: -2px;
 }
+
 .messages .message .text_wrapper .text {
   font-size: 18px;
   font-weight: 300;
@@ -147,15 +169,17 @@ body {
   position: absolute;
   bottom: 0;
 }
+
 .bottom_wrapper .message_input_wrapper {
   display: inline-block;
   height: 50px;
   border-radius: 25px;
   border: 1px solid #bcbdc0;
-  width: calc(100% - 200px);
+  width: calc(100% - 250px);
   position: relative;
   padding: 0 20px;
 }
+
 .bottom_wrapper .message_input_wrapper .message_input {
   border: none;
   height: 100%;
@@ -165,8 +189,9 @@ body {
   outline-width: 0;
   color: gray;
 }
+
 .bottom_wrapper .send_message {
-  width: 140px;
+  width: 120px;
   height: 50px;
   display: inline-block;
   border-radius: 50px;
@@ -178,32 +203,29 @@ body {
   text-align: center;
   float: right;
 }
+
 .send_files {
-  width: 50px;
   position: absolute;
-  margin-left: 5px;
+  overflow: hidden;
+  width: 120px;
   height: 50px;
-  display: inline-block;
   border-radius: 50px;
-  background-color: #a3d063;
-  border: 2px solid #a3d063;
-  color: #fff;
-  cursor: pointer;
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
+  margin-left: 5px;
 }
+
 .file-input {
-  width: 45px;
-  border-radius: 20px;
-  border-style: none;
-  height: 45px;
-  background: transparent;
+  position: absolute;
+  font-size: 50px;
   opacity: 0;
+  right: 0;
+  top: 0;
 }
+
 .bottom_wrapper .send_message:hover {
   color: #a3d063;
   background-color: #fff;
 }
+
 .bottom_wrapper .send_message .text {
   font-size: 18px;
   font-weight: 300;
@@ -226,6 +248,6 @@ body {
 }
 
 .shared-image {
-  height: 320px;
-  width: 240px;
+  height: 100px;
+  width: 150px;
 }

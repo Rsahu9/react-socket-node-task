@@ -79,6 +79,7 @@ class Chat extends Component {
     let file = new FormData();
     file.append('attachment', event.target.files[0]);
     file.append('name', 'attachment');
+    file.append('username', this.state.username);
 
     const uploads = await axios({
       method: "post",
@@ -86,11 +87,7 @@ class Chat extends Component {
       encType:"multipart/form-data",
       data: file,
     });
-    const msg = {
-      username: this.state.username,
-      file: uploads.data,
-      align: 'right'
-    }
+    const msg = this.alignText(uploads.data);
     const temp = [...this.state.message, msg];
     this.setState({
       message: temp,
