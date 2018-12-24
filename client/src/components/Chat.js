@@ -15,6 +15,7 @@ class Chat extends Component {
       text: '',
       username: window.localStorage.getItem('username'),
       online: [],
+      showEmojiPicker: false
     }
     this.chatScreen = '';
   }
@@ -104,7 +105,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { message, username, text, online } = this.state;
+    const { message, username, text, online, showEmojiPicker } = this.state;
     return (
       <Fragment>
         <Navbar logout={this.handleLogout} online={online}/>
@@ -115,7 +116,9 @@ class Chat extends Component {
           refs={elem => { this.chatScreen = elem }}
           username={username} 
           handleSubmit={this.handleSubmit}
-          handleSubmitFile={this.handleSubmitFile} 
+          handleSubmitFile={this.handleSubmitFile}
+          showEmojiPicker={showEmojiPicker}
+          onClick={ (e) => this.setState({ showEmojiPicker: !showEmojiPicker }) } 
         />
       </Fragment>
     );

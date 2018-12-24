@@ -1,5 +1,7 @@
 import React from 'react';
 import moment from 'moment';
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 import { Emoji } from 'emoji-mart';
 
 const ChatWindow = (props) => (
@@ -36,7 +38,16 @@ const ChatWindow = (props) => (
       }
     </ul>
     <div className="bottom_wrapper clearfix">
-      <span className='emoji-button'><Emoji emoji={{ id: 'smiley', skin: 3 }} size={30} ></Emoji></span>
+      { props.showEmojiPicker && <Picker 
+        style={{ 
+          width: '300px', 
+          position: 'absolute', 
+          bottom: '78px', 
+          right: '5px', 
+          zIndex: 1 
+        }} 
+      /> }
+      <span className='emoji-button' onClick={props.onClick}><Emoji emoji={{ id: 'smiley', skin: 3 }} size={30} ></Emoji></span>
       <div className="message_input_wrapper">
         <input 
           className="message_input" 
