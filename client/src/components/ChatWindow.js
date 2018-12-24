@@ -12,16 +12,21 @@ const ChatWindow = (props) => (
       <div className="title">{props.username || 'Bot'}</div>
     </div>
     <ul className="messages" >
-      { props.message.map(({ text, attachment, username, align = 'left', created_At }, index) => (
+      { props.message.map(({ text, attachment, username, fileType, align = 'left', created_At }, index) => (
         <div className="message_template" key={index} ref={props.refs}>
           <li className={`message ${align}`}>
             <div className="avatar"><span className='message-username'>{username}</span></div>
             <div className="text_wrapper">
               { text 
                 ? <div className="text">{text}</div> 
-                : <div className='shared-image'>
-                    <img src={`http://localhost:8000/${attachment}`} alt='shared_image' className='shared-image'/>
-                  </div> }
+                : fileType === 'image'
+                  ? <div className='shared-image'>
+                     <img src={`http://localhost:8000/${attachment}`} alt='shared_image' className='shared-image'/>
+                   </div>
+                  : <div>
+                      <i className="fa fa-file fa-lg" aria-hidden="true"></i><br/>
+                      <a href={`http://localhost:8000/${attachment}`} target='_blank' rel='noopener noreferrer'>{attachment}</a>
+                    </div> }
               <small className='text-muted'>Date: {moment(created_At).format('LLLL')}</small>
             </div>
           </li>

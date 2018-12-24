@@ -54,11 +54,12 @@ router.post('/item/upload', upload.single('attachment'), (req, res, next) => {
 
   const chat = new Chat({
     username: req.body.username,
-    attachment: file.path, 
+    attachment: file.path,
+    fileType: file.mimetype.split('/')[0], 
   })
   chat.save();
 
-  res.send(chat)  
+  res.send({ chat })  
 })
 
 router.get("/chats", async (req, res) => {

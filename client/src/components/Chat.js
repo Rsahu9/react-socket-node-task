@@ -81,13 +81,13 @@ class Chat extends Component {
     file.append('name', 'attachment');
     file.append('username', this.state.username);
 
-    const uploads = await axios({
+    const { data: { chat }} = await axios({
       method: "post",
       url: baseURL + "/item/upload",
       encType:"multipart/form-data",
       data: file,
     });
-    const msg = this.alignText(uploads.data);
+    const msg = this.alignText(chat);
     const temp = [...this.state.message, msg];
     this.setState({
       message: temp,

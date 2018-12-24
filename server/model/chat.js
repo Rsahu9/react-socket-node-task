@@ -4,6 +4,7 @@ const chatSchema = new mongoose.Schema({
   username: String,
   text: String,
   attachment: String,
+  fileType: String,
   created_At: {
     type: Date,
     default: new Date()
