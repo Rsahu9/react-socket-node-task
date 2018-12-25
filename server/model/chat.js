@@ -5,6 +5,7 @@ const chatSchema = new mongoose.Schema({
   text: String,
   attachment: String,
   fileType: String,
+  emoji: Array,
   created_At: {
     type: Date,
     default: new Date()

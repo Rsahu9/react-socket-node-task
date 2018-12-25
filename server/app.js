@@ -33,10 +33,10 @@ const chats = io.of('/chat')
     const chat = new Chat({
       username: data.username,
       text: data.text,
+      emoji: [ ...data.emoji ],
     });
-    chat.emoji.push(data.emoji);
     chat.save();
-    chats.emit('message', data)
+    chats.emit('message', chat)
   })
 
   socket.on("disconnect", () => {

@@ -15,6 +15,7 @@ class Chat extends Component {
       text: '',
       username: window.localStorage.getItem('username'),
       online: [],
+      emojiArray: [],
       showEmojiPicker: false
     }
     this.chatScreen = '';
@@ -37,6 +38,8 @@ class Chat extends Component {
       this2.setState({
         message: temp,
         text: '',
+        emojiArray: [],
+        showEmojiPicker: false,
       });
     });
   }
@@ -76,32 +79,35 @@ class Chat extends Component {
     this.props.history.push('/login');
   }
 
-  handleSubmitFile = async (event) => {
+  handleSubmitFile = (event) => {
     let file = new FormData();
     file.append('attachment', event.target.files[0]);
     file.append('name', 'attachment');
     file.append('username', this.state.username);
 
-    const { data: { chat }} = await axios({
+    axios({
       method: "post",
       url: baseURL + "/item/upload",
       encType:"multipart/form-data",
       data: file,
     });
-    const msg = this.alignText(chat);
-    const temp = [...this.state.message, msg];
-    this.setState({
-      message: temp,
-    });
   }
 
   handleSubmit = (e) => {
-    const { text, username } = this.state;
-    if(e.type === 'keyup' && (e.which || e.keyCode) === 13 ) {
-      socket.emit('message',{ text, username });
-    } else if(e.type === 'click') {
-      socket.emit('message',{ text, username });
+    const { text, username, emojiArray } = this.state;
+    if (e.type === 'keyup' && (e.which || e.keyCode) === 13 ) {
+      socket.emit('message',{ text, emoji: emojiArray, username });
+    } else if (e.type === 'click') {
+      socket.emit('message',{ text, emoji: emojiArray, username });
     }
+  }
+
+  handleEmojiSelect = (emoji) => {
+    const currentEmoji = [ ...this.state.emojiArray, emoji ];
+    this.setState({ 
+      emojiArray: currentEmoji, 
+      text: this.state.text + '' + emoji.native, 
+    });
   }
 
   render() {
@@ -119,6 +125,7 @@ class Chat extends Component {
           handleSubmitFile={this.handleSubmitFile}
           showEmojiPicker={showEmojiPicker}
           onClick={ (e) => this.setState({ showEmojiPicker: !showEmojiPicker }) } 
+          onEmojiSelect={this.handleEmojiSelect}
         />
       </Fragment>
     );

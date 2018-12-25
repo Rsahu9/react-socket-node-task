@@ -15,20 +15,21 @@ const ChatWindow = (props) => (
       <div className="title">{props.username || 'Bot'}</div>
     </div>
     <ul className="messages" >
-      { props.message.map(({ text, attachment, username, fileType, align = 'left', created_At }, index) => (
+      { props.message.map(({ text, attachment, username, fileType, align = 'left', emoji=[], created_At }, index) => (
         <div className="message_template" key={index} ref={props.refs}>
           <li className={`message ${align}`}>
             <div className="avatar"><span className='message-username'>{username}</span></div>
             <div className="text_wrapper">
-              { text 
-                ? <div className="text">{text}</div> 
+              
+              { (emoji.length > 0 || text)
+                ? <div className="text">{ (emoji.length > 0 && emoji.map( ({ id, skin }, index) => <Emoji key={index} emoji={{ id, skin }} size={35}/>)) || text }</div> 
                 : fileType === 'image'
                   ? <div className='shared-image'>
                      <img src={`http://localhost:8000/${attachment}`} alt='shared_image' className='shared-image'/>
                    </div>
                   : <div>
                       <i className="fa fa-file fa-lg" aria-hidden="true"></i><br/>
-                      <a href={`http://localhost:8000/${attachment}`} target='_blank' rel='noopener noreferrer'>{attachment.split('/')[1]}</a>
+                      <a href={`http://localhost:8000/${attachment}`} target='_blank' rel='noopener noreferrer'>{attachment && attachment.split('/')[1]}</a>
                     </div> }
               <small className='text-muted'>Date: {moment(created_At).format('LLLL')}</small>
             </div>
@@ -39,6 +40,7 @@ const ChatWindow = (props) => (
     </ul>
     <div className="bottom_wrapper clearfix">
       { props.showEmojiPicker && <Picker 
+        onSelect={props.onEmojiSelect}
         style={{ 
           width: '300px', 
           position: 'absolute', 
