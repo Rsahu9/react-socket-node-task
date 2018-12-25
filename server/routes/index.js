@@ -59,7 +59,10 @@ router.post('/item/upload', upload.single('attachment'), (req, res, next) => {
   })
   chat.save();
 
-  res.send({ chat })  
+  const io = req.app.get('socketio');
+  io.of('/chat').emit('message', chat);
+
+  res.send({ success: true })  
 })
 
 router.get("/chats", async (req, res) => {

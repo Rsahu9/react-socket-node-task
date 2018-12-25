@@ -12,6 +12,7 @@ const express = require("express"),
       getNewsFromApi = require('./newsApi'),
       getMessageFromBotApi = require('./botApi');
 
+app.set('socketio', io);
 app.use(cors("*"));
 app.use(routes);
 app.use(express.static(__dirname));
@@ -33,6 +34,7 @@ const chats = io.of('/chat')
       username: data.username,
       text: data.text,
     });
+    chat.emoji.push(data.emoji);
     chat.save();
     chats.emit('message', data)
   })
